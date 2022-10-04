@@ -1,0 +1,46 @@
+from guizero import App, Window, PushButton, Text, CheckBox, ListBox, TextBox, ButtonGroup, Picture, Combo, Box,info  #window is second form
+#
+# https://lawsie.github.io/guizero/app/
+#
+#This is needed for the sql database
+import sqlite3
+from sqlite3 import Error
+#Import SQL
+import os
+import os.path
+#Import datetime
+import datetime
+#
+#
+#Define the DDL SQL to make the tables
+#
+#
+#Tables created in database with the following details below
+sql = """
+CREATE TABLE "Customer_Table" ( 
+"CustID" INTEGER NOT NULL,
+"CustFName" TEXT,
+"CustSName" TEXT,
+"CustUsername" TEXT,
+"Custpassword" TEXT,
+"CustAddressLine1" TEXT,
+"CustAddressLine2" TEXT,
+PRIMARY KEY("CustID" AUTOINCREMENT)
+);
+CREATE TABLE "Review_Table" (
+"ReviewID"  INTEGER NOT NULL,
+"ReviewTitle" STRING,
+"ReviewDate" DATE,
+"ReviewDesc"  STRING,
+"CustID"  INTEGER,
+PRIMARY KEY("ReviewID" AUTOINCREMENT),
+CONSTRAINT "CustID_fk"  FOREIGN KEY("CustID") REFERENCES "Customer_Table"("CustID")
+);
+insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword, CustAddressLine1, CustAddressLine2) values ('Bob','Smith', 'UserBob', 'Bob123', '123 Road', 'PO7 0ZQ');
+insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword, CustAddressLine1, CustAddressLine2) values ('Frank','Jones', 'UserFrank', 'Frank123', '456 Road', 'PO7 7PL');
+insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword, CustAddressLine1, CustAddressLine2) values ('Gertrude','Tramp', 'UserGert', 'Gert123', '789 Road', 'PO8 3UY');
+
+insert into Review_Table (ReviewTitle, ReviewDate, ReviewDesc,CustID) values ('aaaaa', '07/06/2003', 'Fuel prices', 1);
+insert into Review_Table (ReviewTitle, ReviewDate, ReviewDesc,CustID) values ('bbbbb', '07/06/2003', 'dfjkgsjdi', 2);
+insert into Review_Table (ReviewTitle, ReviewDate, ReviewDesc,CustID) values ('ccccc', '07/06/2003', 'dshgsdjkfh', 2);
+"""
