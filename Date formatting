@@ -1,0 +1,7 @@
+import datetime
+
+DateToday = datetime.date.today()
+#format date using strftime
+FormatDate = DateToday.strftime("%d/%m/%Y")
+ReviewDate_textbox = TextBox(ReviewWindow, width = 30, text = FormatDate)
+ReviewDate_textbox.disable()
