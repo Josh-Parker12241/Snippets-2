@@ -1,0 +1,17 @@
+def Save_Review():
+	#presence check for review page
+
+	if ReviewTitle_textbox.value == "":
+		info("Error","You must enter a Review Title!")
+	elif ReviewDate_textbox.value == "":
+		info("Error","You must enter a date!")
+
+	elif ReviewDesc_textbox.value == "":
+		info("Error","You must enter a description!")
+	else:
+		#adds review to database using custID as the foreign key.
+		SQLReviewInsert = ("INSERT INTO Review_table(ReviewTitle,ReviewDate, ReviewDesc,CustID) VALUES ('"+ str(ReviewTitle_textbox.value) + "','" + str(ReviewDate_textbox.value) + "','" + str(ReviewDesc_textbox.value)+"','" + str(userlogin)+"')")
+		print(SQLReviewInsert)
+		execute_sql(database_file,SQLReviewInsert)
+		info("Success","Review has been added")
+		ReviewWindow.hide()
