@@ -1,0 +1,68 @@
+def valid():
+	#Presence check for forename
+	if Fname_textbox.value == "":
+		#info box for UX
+		info("Error","must enter a forename!")
+		#Presence check for surname
+	elif Sname_textbox.value == "":
+		#info box for UX
+		info("Error","must enter a forename!")
+
+	#length check for forename (more than 3)
+	elif len(Fname_textbox.value) <=3:
+		#info box for UX
+		info("Error","forename must be more than 3 characters!")
+
+	#length check for forename (less than 15)
+	elif len(Fname_textbox.value) >=15:
+		#info box for UX
+		info("Error","username must be less than 15 characters!")
+	
+	#Presence check for username
+	elif user_textbox.value == "":
+		#info box for UX
+		info("Error","Must enter a username!")
+
+	#length check for username (more than 3)
+	elif len(user_textbox.value) <=3:
+		#info box for UX
+		info("Error","forename must be more than 3 characters!")
+
+	#length check for username (less than 15 )
+	elif len(user_textbox.value) >=15:
+		info("Error","username must be less than 15 characters!")
+
+	#presence check for password
+	elif PW_textbox.value == "":
+		#info box for UX
+		info("Error","Must enter a password")
+
+	#length check for password (more than 3)
+	elif len(PW_textbox.value) <=3:
+		#info box for UX
+		info("Error","forename must be more than 3 characters!")
+
+	#length check for password (less than 15 )
+	elif len(PW_textbox.value) >=15:
+		#info box for UX
+		info("Error","username must be less than 15 characters!")
+
+	#presence check for Address1
+	elif Address1_textbox.value == "":
+		#info box for UX
+		info("Error","must enter an address!")
+
+	#length check for address 2 (equal to 6
+	elif len(Address2_textbox.value) != 6:
+		#info box for UX
+		info("Error","post code must be length of 6")
+
+	else:
+		#SQL to add customer to database using values from sign up window.
+		SQLInsert = ("INSERT INTO Customer_Table(CustFname, CustSname, CustUsername, Custpassword, CustAddressLine1, CustAddressLine2) VALUES ('"+ str(Fname_textbox.value) + "','" + str(Sname_textbox.value) + "','" + str(user_textbox.value) + "','" + str(PW_textbox.value) + "','" + str(Address1_textbox.value) + "','" + str(Address2_textbox.value)+ "')")
+		execute_sql(database_file, SQLInsert)
+		print(SQLInsert)
+		#info box for UX
+		info("Success","Account has been added")
+		#hides window
+		SignUpwindow.hide()
