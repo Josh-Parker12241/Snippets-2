@@ -1,0 +1,39 @@
+#################################
+#SignUp window             #
+#################################
+
+#create the SignUpwindow, set dimensions
+SignUpwindow = Window(app, title = "Sign Up", height=600, width=600)
+text_blank = Text(SignUpwindow, text=" ")
+#create text above textbox
+text= Text(SignUpwindow, text= "enter first name")
+#create textbox for user input
+Fname_textbox = TextBox(SignUpwindow,width = 20)
+text_blank = Text(SignUpwindow, text=" ")
+text= Text(SignUpwindow, text= "enter Surname")
+Sname_textbox = TextBox(SignUpwindow,width = 20)
+text_blank = Text(SignUpwindow, text=" ")
+text = Text(SignUpwindow, text= "enter user name")
+user_textbox = TextBox(SignUpwindow,width = 20)
+text_blank = Text(SignUpwindow, text=" ")
+text = Text(SignUpwindow, text= "enter user Password")
+PW_textbox = TextBox(SignUpwindow,width = 20)
+text = Text(SignUpwindow, text="Address Line 1")
+Address1_textbox = TextBox(SignUpwindow,width = 20)
+text_blank = Text(SignUpwindow, text=" ")
+text = Text(SignUpwindow, text="Address Line 2")
+Address2_textbox = TextBox(SignUpwindow,width = 20)
+text_blank = Text(SignUpwindow, text=" ")
+#
+text_blank = Text(SignUpwindow, text=" ")
+text_blank = Text(SignUpwindow, text=" ")
+#
+#create button in window, executes function called valid
+SignUp_button = PushButton(SignUpwindow, text="Create Account",command =valid)
+#create button in window, executes function called Backwindow
+back_button = PushButton(SignUpwindow, text= "back", command =Backwindow)
+#set window background to white
+SignUpwindow.bg = "white"
+text_blank = Text(SignUpwindow, text=" ")
+#hide window
+SignUpwindow.hide()
