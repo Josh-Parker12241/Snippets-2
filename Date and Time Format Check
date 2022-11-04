@@ -1,0 +1,32 @@
+def DateCheck(BookingDate): # www.geeksforgeeks.org/python-validate-string-date-format/
+
+    Dateformat = "%d/%m/%Y"
+    result = True
+    try:
+        resultdate = datetime.strptime(BookingDate, Dateformat)
+        result = True
+    except ValueError:
+        info("Error","Date must be in format DD/MM/YYYY")
+        result = False
+    return result
+#
+#
+def TimeCheck(BookingTime): # 
+    Hourlist = ['08','09','10','11','12','13','14','15','16','17','18','19','20']
+    Minlist = ['00','30']
+    HRS = BookingTime[0:2]
+    MINS = BookingTime[3:5]
+    if len(BookingTime) == 2:
+        info('Error!','Please enter the time in a hh:mm format')
+    else:
+        MIDDLE = BookingTime[2]
+
+        if HRS not in Hourlist:
+            info("Error","Invalid format\n Must be hh:mm\n only accepts half hour intervals")
+
+        elif MINS not in Minlist:
+            info("Error","Invalid format\n Must be hh:mm\n only accepts half hour intervals")
+
+    
+        else:
+            return True
