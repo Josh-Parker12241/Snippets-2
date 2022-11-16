@@ -1,8 +1,8 @@
-database_file = 'UserApp.db'
+database_file = 'Reviews.db'
 #
 #
 #
-#Delete the database, only if it exists
+#Deletes the database if it exists
 #
 #
 if os.path.exists(database_file):
@@ -24,7 +24,7 @@ conn.commit()
 #
 def query_database(database, query):
 	Lconn = sqlite3.connect(database)
-	cur = Lconn.cursor()			# use a local cursor
+	cur = Lconn.cursor()			# uses a local cursor
 	cur.execute(query)
 	rows = cur.fetchall()
 	cur.close()
