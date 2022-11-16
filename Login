@@ -1,4 +1,4 @@
-def login_user():  #### TEST WITH 'or 1 = 1; --
+def login_user():  
 	#set as global variable
 	global userlogin
 	#Presence check
