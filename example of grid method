@@ -1,0 +1,35 @@
+#################################
+#SignUp window             #
+#################################
+
+#create the SignUpwindow, set dimensions
+SignUpwindow = Window(app, title = "Sign Up", height=600, width=600)
+sign_up_box = Box(SignUpwindow, layout="grid")
+#create text above textbox
+text= Text(sign_up_box, text= "enter first name",grid=[0,1])
+
+#create textbox for user input
+Fname_textbox = TextBox(sign_up_box,width = 20,grid=[2,1])
+text= Text(sign_up_box, text= "enter Surname",grid =[0,2])
+Sname_textbox = TextBox(sign_up_box,width = 20, grid =[2,2])
+text= Text(sign_up_box, text= "enter Date of Birth", grid =[0,3])
+DoB_textbox = TextBox(sign_up_box,width = 20,grid =[2,3])
+text = Text(sign_up_box, text= "enter user name", grid =[0,4])
+user_textbox = TextBox(sign_up_box,width = 20, grid =[2,4])
+text = Text(sign_up_box, text= "enter user Password", grid = [0,5])
+PW_textbox = TextBox(sign_up_box,width = 20, grid = [2,5])
+text = Text(sign_up_box, text="Confirm Password", grid = [0,6])
+ConfirmPW_textbox = TextBox(sign_up_box,width = 20, grid = [2,6])
+TCcheckbox = CheckBox(SignUpwindow, text="Accept Terms and Conditions", align="top")
+#
+Sign_up_ButtonBox = Box(SignUpwindow,layout = "grid")
+#
+#create button in window, executes function called valid
+SignUp_button = PushButton(Sign_up_ButtonBox, text="Create Account",grid = [1,4],command =valid)
+text_blank = Text(SignUpwindow, text=" ")
+#create button in window, executes function called Backwindow
+back_button = PushButton(Sign_up_ButtonBox, text= "Back",grid = [0,4],command =Backwindow)
+#set window background to white
+SignUpwindow.bg = "light blue"
+#hide window
+SignUpwindow.hide()
