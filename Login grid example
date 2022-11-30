@@ -1,0 +1,20 @@
+#################################
+#Login window             #
+#################################
+#
+#create login window and set dimensions
+LogInwindow = Window(app, title = "LogIn", height=300, width=600)
+LogIn_box = Box(LogInwindow, layout="grid")
+text = Text(LogIn_box, text= "enter user name",grid = [0,1])
+user_textboxLogin = TextBox(LogIn_box, grid = [2,1],width = 20)
+text = Text(LogIn_box, text= "enter user Password", grid = [0,2])
+PW_textboxLogin = TextBox(LogIn_box, grid = [2,2],width = 20)
+#
+LogIn_ButtonBox =Box(LogInwindow,layout = "grid")
+#create button, executes login_user function
+open_button = PushButton(LogIn_ButtonBox, text="Log In",grid = [1,4], command=login_user)
+#create button in window, executes function called Backwindow
+back_button = PushButton(LogIn_ButtonBox, text= "Back", grid = [0,4], command =Backwindow)
+LogInwindow.bg = "light blue"
+#hide window
+LogInwindow.hide()
