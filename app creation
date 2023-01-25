@@ -1,0 +1,14 @@
+#creates the main window, set dimension of page
+app = App(title="TokaFitness", height = 600, width =600)
+app_box = Box(app,layout = "grid")
+#creates title for the window
+text = Text(app, text="Welcome to TokaFitness!")
+#creates button that executes Signupwindow function
+button = PushButton(app, text="Sign Up",command = open_SignUpwindow)
+#creates buton that executues loginwindow function
+button = PushButton(app, text="Log In",command = open_LogInwindow)
+text_blank = Text(app, text=" ")
+text_blank = Text(app, text=" ")
+picture = Picture(app, image="Home Page Image.png")
+logo = Picture(app_box,image = "Toka Logo v2.png", grid =[0,1],height = 150, width = 175)
+app.bg = "#5f5f5f"
