@@ -1,0 +1,95 @@
+from guizero import *  #window is second form
+#
+# https://lawsie.github.io/guizero/app/
+#
+#This is needed for the sql database
+import sqlite3
+from sqlite3 import Error
+#Import SQL
+import os
+import os.path
+#Import datetime
+import datetime
+#
+#
+#Define the DDL SQL to make the tables
+#
+#
+#Tables created in database with the following details below
+sql = """
+CREATE TABLE "Customer_Table" ( 
+"CustID" INTEGER NOT NULL,
+"CustFName" TEXT,
+"CustSName" TEXT,
+"CustUsername" TEXT,
+"Custpassword" TEXT,
+PRIMARY KEY("CustID" AUTOINCREMENT)
+);
+CREATE TABLE "Booking_Table" (
+"BookingID"  INTEGER NOT NULL,
+"DateofBooking" DATE,
+"Performance" TEXT,
+"PerformanceDate"  DATE,
+"PerformanceTime" TEXT,
+"CustID"  INTEGER,
+PRIMARY KEY("BookingID" AUTOINCREMENT),
+CONSTRAINT "CustID_fk"  FOREIGN KEY("CustID") REFERENCES "Customer_Table"("CustID")
+);
+CREATE TABLE "Seat_Table" (
+"SeatID"  INTEGER NOT NULL,
+"SeatName" TEXT,
+"SeatCost" REAL,
+"BookingID"  INTEGER,
+PRIMARY KEY("SeatID" AUTOINCREMENT),
+CONSTRAINT "BookingID_fk"  FOREIGN KEY("BookingID") REFERENCES "Booking_Table"("BookingID")
+);
+insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword) values ('Bob','Smith', 'UserBob', 'Bob123');
+insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword) values ('Wok','Poland', 'UserWok', 'Wok123');
+
+insert into Booking_Table (DateofBooking, Performance, PerformanceDate, PerformanceTime, CustID) values ('25/01/2023', '1', '25/01/2023','20:00', 1);
+
+insert into Seat_Table (SeatName, SeatCost, BookingID) values ('A1','17.90', 1);
+
+"""
+
+database_file = 'Seats.db'
+#
+#
+#
+#Deletes the database if it exists
+#
+#
+if os.path.exists(database_file):
+   os.remove(database_file)
+#
+#Connect to the database
+conn = sqlite3.connect(database_file) #My connection is called 'conn'
+#Get a cursor pointing to the database
+cursor = conn.cursor()
+#Create the tables
+cursor.executescript(sql) # creates from DDL above, script more than 1 command
+#Commit to save everything
+conn.commit()
+#Close the connection to the database
+#
+#Queries the database using the database parameter as the database
+#to query and the query parameter as the actual query to issue
+# for SELECT
+#
+def query_database(database, query):
+	Lconn = sqlite3.connect(database)
+	cur = Lconn.cursor()			# uses a local cursor
+	cur.execute(query)
+	rows = cur.fetchall()
+	cur.close()
+	return rows
+#
+#
+#Executes the sql statement to INSERT and UPDATE rows
+#
+def execute_sql(database, sql_statement):
+	Lconn = sqlite3.connect(database)
+	cur = Lconn.cursor()
+	cur.execute(sql_statement)
+	Lconn.commit()
+	return cur.lastrowid
