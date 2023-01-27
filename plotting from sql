@@ -1,0 +1,53 @@
+def TotalSeats():
+	SQLSeats = "SELECT COUNT(SeatID) FROM Seat_Table"
+	rows= query_database(database_file, SQLSeats)
+	#info box for UX
+	total1 = rows[0][0]
+	info("Count","You have sold " + str(total1) + " tickets in total")
+
+def FridaySeats():
+	SQLFriSeats = ("SELECT COUNT(SeatID) FROM Seat_Table WHERE SeatDay = 'Friday'")
+	rows= query_database(database_file, SQLFriSeats)
+	#info box for UX
+	total1 = rows[0][0]
+	info("Count","You have sold " + str(total1) + " tickets in total on Friday")
+	
+def SaturdaySeats():
+	SQLSatSeats = ("SELECT COUNT(SeatID) FROM Seat_Table WHERE SeatDay = 'Saturday'")
+	rows= query_database(database_file, SQLSatSeats)
+	#info box for UX
+	total1 = rows[0][0]
+	info("Count","You have sold " + str(total1) + " tickets in total on Saturday")
+
+def FridaySeatsGraph():
+	SQLFriSeats = ("SELECT COUNT(SeatID) FROM Seat_Table WHERE SeatDay = 'Friday'")
+	rows= query_database(database_file, SQLFriSeats)
+	#info box for UX
+	total2 = rows[0][0]
+	return total2
+	
+def SaturdaySeatsGraph():
+	SQLSatSeats = ("SELECT COUNT(SeatID) FROM Seat_Table WHERE SeatDay = 'Saturday'")
+	rows= query_database(database_file, SQLSatSeats)
+	#info box for UX
+	total3 = rows[0][0]
+	return total3
+
+def TotalCost():
+	SQLCost = "SELECT SUM(SeatCost) FROM Seat_Table"
+	rows = query_database(database_file,SQLCost)
+	total1 = rows [0][0]
+	info("Cost","The total cost is £" +str(total1))
+
+def DisplayGraph():
+	#user stored as a global variable to plot graph for that user
+	Friday = FridaySeatsGraph()
+	Saturday = SaturdaySeatsGraph()
+	x_axis = ['Friday','Saturday']
+	y_axis = [Friday, Saturday]
+	# plots bar graph
+	plt.xlabel('Day')
+	plt.ylabel('Sold Seats')
+	plt.title('Seat count')
+	plt.bar(x_axis,y_axis)
+	plt.show()
