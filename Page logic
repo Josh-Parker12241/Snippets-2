@@ -1,0 +1,9 @@
+def ShowSubContent():
+	if WorkoutBox.visible == True or NutritionBox.visible == True or AboutUsBox.visible == True or GetPremiumBox.visible == True:
+		WorkoutBox.visible = False
+		NutritionBox.visible = False
+		AboutUsBox.visible = False
+		GetPremiumBox.visible = False
+		SubscriberBox.visible = True
+	else:
+		SubscriberBox.visible = True
