@@ -1,0 +1,16 @@
+def DisplayGraph():
+	#user stored as a global variable to plot graph for that user
+	global userlogin
+	conn = sqlite3.connect("Fitness.db")
+	cur = conn.cursor()
+	cur.execute("SELECT SessionDate, CaloriesBurnt FROM Session_Table WHERE UserID ="+ str(userlogin))
+	df = pd.DataFrame(cur.fetchall(), columns = ["Date","Calories"])
+	print(df)
+	# plots bar graph
+	plt.bar(df['Date'],df['Calories'])
+	plt.xlabel('Session Date')
+	plt.ylabel('Calories Burnt')
+	plt.title('Calories Burnt')
+	plt.savefig("calories.png")
+	plt.show()
+	plt.close()
