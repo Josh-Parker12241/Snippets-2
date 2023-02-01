@@ -1,0 +1,6 @@
+#################################
+TCsWindow = Window(app,title = "Terms and Conditions", height = 400, width = 1400)
+logo = Picture(TCsWindow,image = "Toka Logo v2.png",height = 150, width = 175)
+TCsText = Text(TCsWindow, text = "Please read these Terms and Conditions before creating an account with us. We may change these Terms from time to time. If we do, we will let you know by publishing the updated Terms on the App.\n If you continue to use the App and the Services after we have published the updated Terms, you are agreeing to be bound by the updated Terms. \n-TokaFitness does not take responsibility for any injuries you sustain during your workouts.\n -Your privacy is important to us. Our Privacy Policy sets out how we collect, use,\n and disclose your personal information. By using the App and the Services, you agree to the collection, use, and disclosure of your personal information in accordance with our Privacy Policy.")
+TCsBack = PushButton(TCsWindow, text = "Close",command = HideTCs)
+TCsWindow.bg = "#5f5f5f"
