@@ -1,15 +1,21 @@
-from guizero import *  #window is second form
+from guizero import *
 #
 # https://lawsie.github.io/guizero/app/
 #
 #This is needed for the sql database
-import sqlite3
-from sqlite3 import Error
+import sqlite3    
 #Import SQL
 import os
 import os.path
-#Import datetime
+#imports datetime library for date validation
 import datetime
+from datetime import datetime
+#import the matplotlib library for plotting graphs
+import matplotlib.pyplot as plt
+#import the pandas library to help with plotting
+import pandas as pd
+#import the library to launch url
+import webbrowser
 #
 #
 #Define the DDL SQL to make the tables
@@ -17,79 +23,43 @@ import datetime
 #
 #Tables created in database with the following details below
 sql = """
-CREATE TABLE "Customer_Table" ( 
-"CustID" INTEGER NOT NULL,
-"CustFName" TEXT,
-"CustSName" TEXT,
-"CustUsername" TEXT,
-"Custpassword" TEXT,
-PRIMARY KEY("CustID" AUTOINCREMENT)
+CREATE TABLE "User_Table" ( 
+"UserID" INTEGER NOT NULL,
+"UserFName" TEXT,
+"UserSName" TEXT,
+"UserDoB" DATE,
+"Username" TEXT,
+"Userpassword" TEXT,
+"Subscribed" BOOL,
+PRIMARY KEY("UserID" AUTOINCREMENT)
 );
-CREATE TABLE "Booking_Table" (
-"BookingID"  INTEGER NOT NULL,
-"DateofBooking" DATE,
-"Performance" TEXT,
-"PerformanceDate"  DATE,
-"PerformanceTime" TEXT,
-"CustID"  INTEGER,
-PRIMARY KEY("BookingID" AUTOINCREMENT),
-CONSTRAINT "CustID_fk"  FOREIGN KEY("CustID") REFERENCES "Customer_Table"("CustID")
+CREATE TABLE "Session_Table" (
+"SessionID"  INTEGER NOT NULL,
+"Gender" TEXT,
+"WeightKg" INTEGER,
+"HeightM"  TEXT,
+"Duration" INTEGER,
+"SessionDate"  DATE,
+"CaloriesBurnt" INTEGER,
+"UserID" INTEGER,
+PRIMARY KEY("SessionID" AUTOINCREMENT)
+CONSTRAINT "UserID_fk"  FOREIGN KEY("UserID") REFERENCES "User_Table"("UserID")
 );
-CREATE TABLE "Seat_Table" (
-"SeatID"  INTEGER NOT NULL,
-"SeatName" TEXT,
-"SeatCost" REAL,
-"BookingID"  INTEGER,
-PRIMARY KEY("SeatID" AUTOINCREMENT),
-CONSTRAINT "BookingID_fk"  FOREIGN KEY("BookingID") REFERENCES "Booking_Table"("BookingID")
+CREATE TABLE "Payment_Table" (
+"PaymentID" INTEGER NOT NULL,
+"CardNumber" TEXT,
+"ExpiryDate" DATE,
+"CVCNumber" TEXT,
+"UserID" INTEGER,
+PRIMARY KEY ("PaymentID" AUTOINCREMENT)
+CONSTRAINT "UserID_fk"  FOREIGN KEY("UserID") REFERENCES "User_Table"("UserID")
 );
-insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword) values ('Bob','Smith', 'UserBob', 'Bob123');
-insert into Customer_Table (CustFName, CustSname, CustUsername, CustPassword) values ('Wok','Poland', 'UserWok', 'Wok123');
+insert into User_Table (UserFName, UserSname, UserDoB, Username, Userpassword, Subscribed) values ('Bob','Smith','06/07/1990','UserBob','Bob123!','No');
+insert into User_Table (UserFName, UserSname, UserDoB, Username, Userpassword, Subscribed) values ('Frank','Franklin','09/08/1997','UserFrank','Frank123!','No');
+insert into User_Table (UserFName, UserSname, UserDoB, Username, Userpassword, Subscribed) values ('Wok','Poland','11/07/1988','UserWok','Wok123!','Yes');
 
-insert into Booking_Table (DateofBooking, Performance, PerformanceDate, PerformanceTime, CustID) values ('25/01/2023', '1', '25/01/2023','20:00', 1);
-
-insert into Seat_Table (SeatName, SeatCost, BookingID) values ('A1','17.90', 1);
-
+insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '100', '120', 60, '25/11/2022','400', '1');
+insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '100', '100', 120, '26/11/2022','300', '1');
+insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '150', '130', 180, '27/11/2022','900', '1');
+insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '150', '130', 180, '29/11/2022','1200', '1');
 """
-
-database_file = 'Seats.db'
-#
-#
-#
-#Deletes the database if it exists
-#
-#
-if os.path.exists(database_file):
-   os.remove(database_file)
-#
-#Connect to the database
-conn = sqlite3.connect(database_file) #My connection is called 'conn'
-#Get a cursor pointing to the database
-cursor = conn.cursor()
-#Create the tables
-cursor.executescript(sql) # creates from DDL above, script more than 1 command
-#Commit to save everything
-conn.commit()
-#Close the connection to the database
-#
-#Queries the database using the database parameter as the database
-#to query and the query parameter as the actual query to issue
-# for SELECT
-#
-def query_database(database, query):
-	Lconn = sqlite3.connect(database)
-	cur = Lconn.cursor()			# uses a local cursor
-	cur.execute(query)
-	rows = cur.fetchall()
-	cur.close()
-	return rows
-#
-#
-#Executes the sql statement to INSERT and UPDATE rows
-#
-def execute_sql(database, sql_statement):
-	Lconn = sqlite3.connect(database)
-	cur = Lconn.cursor()
-	cur.execute(sql_statement)
-	Lconn.commit()
-	return cur.lastrowid
