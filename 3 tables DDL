@@ -63,3 +63,18 @@ insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, Cal
 insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '150', '130', 180, '27/11/2022','900', '1');
 insert into Session_Table (Gender, WeightKg, HeightM, Duration, SessionDate, CaloriesBurnt, UserID) values ('Male', '150', '130', 180, '29/11/2022','1200', '1');
 """
+
+database_file = 'Fitness.db'
+
+#deletes the database
+if os.path.exists(database_file):
+    os.remove(database_file)
+#
+#Connects to the database
+conn = sqlite3.connect(database_file)
+#Generates a cursor
+cursor = conn.cursor()
+#Create the tables
+cursor.executescript(sql) # creates tables from the code above
+#Commit/save everything
+conn.commit()
