@@ -1,0 +1,14 @@
+PaymentWindow = Window(app, title = "TokaFitness", height = 600, width = 600)
+PaymentBox = Box(PaymentWindow, layout = "grid")
+logo = Picture(PaymentBox,image = "Toka Logo v2.png", grid =[1,1],height = 200, width = 200)
+CardNumbertext = Text(PaymentBox, text = "Enter Card Number", grid = [0,2])
+CardNumberTextBox = TextBox(PaymentBox,width = 20, grid = [2,2])
+Expirytext = Text(PaymentBox, text = "Enter Expiry Date", grid = [0,3])
+ExpiryTextBox = TextBox(PaymentBox,width = 20, grid = [2,3])
+CVCNumberText = Text(PaymentBox,grid = [0,4],text ="Enter CVC Number")
+CVCNumberTextBox = TextBox(PaymentBox,width = 20, grid =[2,4])
+ConfirmPrem = PushButton(PaymentBox, text = "Confirm", grid = [1,5],command = ValidPayment)
+BackButton = PushButton(PaymentBox, text = "Back",grid = [1,6], command =  HidePayment)
+PaymentWindow.bg = "#5f5f5f"
+
+PaymentWindow.hide()
