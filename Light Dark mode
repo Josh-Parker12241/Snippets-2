@@ -1,0 +1,6 @@
+#turns app background to light mode
+def LightMode():
+	app.bg = "light grey"
+# turns app background to dark mode
+def DarkMode():
+	app.bg = "#5f5f5f"
