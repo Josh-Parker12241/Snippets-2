@@ -1,0 +1,5 @@
+def BookGym():
+	# launches web to view gyms
+	URL = 'https://www.puregym.com/gyms/'
+	warn("Notification","You will be redirected to the web")
+	webbrowser.open(URL,autoraise = True)
