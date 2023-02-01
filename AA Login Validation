@@ -1,0 +1,30 @@
+def login_user():  
+    #set as global variable
+    global userlogin
+    #Presence check
+    if user_textboxLogin.value == " ":
+        #Info box for UX
+        info("Error", "You must enter a valid username")
+        #Presence check
+    elif PW_textboxLogin.value == " ":
+        #Info box for UX
+        info("Error", "You must enter a password")
+
+    elif "'" in PW_textboxLogin.value  or "'" in user_textboxLogin.value:
+        info("Error", "SQL injection")
+        
+    else:
+        sqlselect = ("SELECT * FROM User_Table WHERE Username = "+"'"+ str(user_textboxLogin.value)+"'"+" AND Userpassword = "+"'"+ str(PW_textboxLogin.value)+"'")
+        rows = query_database(database_file, sqlselect)
+        
+        if len(rows) == 0:
+            info("Error","Details not found")
+        else: 
+            #user is granted access
+            #info box for UX
+            info("Log in","Success all details found")
+            userlogin = rows[0][0]
+            #hides LogInwindow
+            LogInwindow.hide()
+            #shows fitness Window
+            FitnessWindow.show()
