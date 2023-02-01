@@ -1,0 +1,2 @@
+elif "'" in PW_textboxLogin.value  or "'" in user_textboxLogin.value:
+        info("Error", "SQL injection")
