@@ -1,0 +1,19 @@
+def ValidWorkout():
+	#presence check for weight
+	if WeightTextBox.value == "":
+		info("Error","Must enter a weight")
+	#type check for weight
+	elif WeightTextBox.value.isnumeric() == False:
+		info("Error","Weight must be a number")
+	#presence check for height
+	elif HeightTextBox.value == "":
+		info("Error","Must enter a height")
+	#type check for height
+	elif HeightTextBox.value.isnumeric() == False:
+		info("Error","Height must be a number")
+	#control for what workout comes up
+	elif GenderButton.value == "Male":
+		MaleWorkoutPlanWindow.show()
+
+	else:
+		FemaleWorkoutPlanWindow.show()
